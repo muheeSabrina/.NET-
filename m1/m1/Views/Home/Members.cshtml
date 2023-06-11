@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Members";
+}
+
+<h2>Members</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.Name
+            <ul>
+                <li>@item.DOB</li>
+                <li>@item.BG</li>
+            </ul>
+        </li>
+    }
+</ul>
+
