@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@using RMS.Data;
+<body>
+    @*<a href="/account/logout" class="Button">LOG OUT</a>*@
+    <a href="/account/logout">
+        <button type="button" class="btn btn-info">Log Out</button>
+    </a>
+    <br />
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{ User user = (User)Session["user"];}
+                    @if (user.TypeId == 1)
+                    {
+                        <li>@Html.ActionLink("RequestList", "RequestList", "Admin")</li>
+                    }
+                    else if (user.TypeId == 2)
+                    {
+                        <li>@Html.ActionLink("RequestList", "RequestList", "Restaurent")</li>
+                    }
+                    else if (user.TypeId == 3)
+                    {
+                        <li>@Html.ActionLink("RequestList", "RequestList", "Employee")</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
